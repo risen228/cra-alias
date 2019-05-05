@@ -38,7 +38,7 @@ The next steps depend on the language:
 
 <details>
 <summary><b>JavaScript</b></summary>
-<br>
+
 1. Go to project's root directory.
 
 2. Create (or open if exists) `jsconfig.json`.
@@ -76,7 +76,7 @@ The next steps depend on the language:
 
 <details>
 <summary><b>TypeScript</b></summary>
-<br>
+
 1. Go to project's root directory.
 
 2. Create `tsconfig.paths.json`.
