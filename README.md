@@ -24,20 +24,24 @@ You don't need to eject your App to add aliases!
 - [x] Support `npm test`
 - [x] Support TypeScript CRA
 - [ ] Support extra cli arguments
-- [ ] Add TypeScript example to README
+- [x] Add TypeScript example to README
 
 ### Installation
 
-1. Install this package:
+Install the package:
 
-   ```sh
-   npm i -D cra-alias
-   ```
+```sh
+npm i -D cra-alias
+```
 
-2. Create (or open if exists) one of the following files in app root directory:
+The next steps depend on the language:
 
-   - `jsconfig.json` if you use JavaScript
-   - `tsconfig.json` if you use TypeScript
+<details>
+<summary><b>JavaScript</b></summary>
+<br>
+1. Go to project's root directory.
+
+2. Create (or open if exists) `jsconfig.json`.
 
 3. Edit it as follows:
 
@@ -53,9 +57,9 @@ You don't need to eject your App to add aliases!
    }
    ```
 
-4. Go to package.json
+4. Go to `package.json`
 
-5. Replace 'react-scripts' with 'cra-alias', like that:
+5. Replace `react-scripts` with `cra-alias`, like that:
 
    ```diff
      "scripts": {
@@ -68,5 +72,57 @@ You don't need to eject your App to add aliases!
        "eject": "react-scripts eject"
      }
    ```
+</details>
 
-6. Done. Let's get to work!
+<details>
+<summary><b>TypeScript</b></summary>
+<br>
+1. Go to project's root directory.
+
+2. Create `tsconfig.paths.json`.
+
+3. Edit it as follows:
+
+   ```js
+   {
+     "compilerOptions": {
+       "baseUrl": "src", // only 'src' or 'node_modules'
+       "paths": {
+         "@file-alias": ["./your/file.tsx"],
+         "@folder-alias/*": ["./very/long/path/*", "./very/long/path/"]
+       }
+     }
+   }
+   ```
+
+4. Go to `tsconfig.json`.
+
+5. Add the following line to the beginning of the file:
+
+   ```diff
+   {
+   + "extends": "./tsconfig.paths.json",
+     "compilerOptions": {
+       "target": "es5",
+       ...
+     },
+     ...
+   }
+   ```
+
+6. Go to `package.json`.
+
+7. Replace `react-scripts` with `cra-alias`, like that:
+
+   ```diff
+     "scripts": {
+   -   "start": "react-scripts start",
+   +   "start": "cra-alias start",
+   -   "build": "react-scripts build",
+   +   "build": "cra-alias build",
+   -   "test": "react-scripts test",
+   +   "test": "cra-alias test",
+       "eject": "react-scripts eject"
+     }
+   ```
+</details>
