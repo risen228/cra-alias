@@ -56,6 +56,34 @@ describe("extract", () => {
     ).toBe(errorsKeys.INVALID_ALIAS_PATHS);
   });
 
+  test("should work with any 'baseUrl' format", () => {
+    const withBaseUrl = baseUrl =>
+      extract({
+        compilerOptions: {
+          baseUrl,
+          paths: {
+            "@path/*": ["./path/*", "./path/"]
+          }
+        }
+      }).aliases["@path"];
+
+    const variants = [
+      "src",
+      "./src",
+      "src/",
+      "./src/",
+      "././././src",
+      "src/../src",
+      "././src/../././src/."
+    ];
+
+    const answer = "../src/path";
+
+    for (let variant of variants) {
+      expect(withBaseUrl(variant)).toBe(answer);
+    }
+  });
+
   test("should generate the right paths", () => {
     const withAlias = (pathName, pathValue) =>
       extract({
@@ -67,21 +95,17 @@ describe("extract", () => {
         }
       }).aliases;
 
-    expect(withAlias("@path/*", ["./path/*", "./path/"])).toEqual({
-      "@path": "../src/path"
-    });
+    const variants = [
+      [["@path/*", ["./path/*", "./path/"]], { "@path": "../src/path" }],
+      [["@path/*", ["./path/*"]], { "@path": "../src/path" }],
+      [["@path", ["./path"]], { "@path": "../src/path" }],
+      [["@path/*", ["./path/../path/././*", "./path/"]], { "@path": "../src/path" }],
+      [["@config", ["./config.js"]], { "@config": "../src/config.js" }]
+    ];
 
-    expect(withAlias("@config", ["./config.js"])).toEqual({
-      "@config": "../src/config.js"
-    });
-
-    expect(withAlias("@path/*", ["./path/*"])).toEqual({
-      "@path": "../src/path"
-    });
-
-    expect(withAlias("@path", ["./path"])).toEqual({
-      "@path": "../src/path"
-    });
+    for (let variant of variants) {
+      expect(withAlias(...variant[0])).toEqual(variant[1]);
+    }
   });
 
   test("should work with multiple aliases", () => {
