@@ -16,7 +16,7 @@ const errorsMessages = {
   [errorsKeys.PATHS_IS_UNDEFINED]: "'compilerOptions.paths' is not specified",
   [errorsKeys.INVALID_ALIAS_PATHS]: ({ aliasName }) =>
     `Invalid alias paths for '${aliasName}'`,
-  [errorsKeys.TSCONFIG_IS_NOT_EXTENDED]: "config is not extended"
+  [errorsKeys.TSCONFIG_IS_NOT_EXTENDED]: "tsconfig is not extended"
 };
 
 exports.errorsKeys = errorsKeys;
