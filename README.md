@@ -34,7 +34,7 @@ You don't need to eject your App to add aliases!
    npm i -D cra-alias
    ```
 
-2. Create (or open if it exists) one of the following files in app root directory:
+2. Create (or open if exists) one of the following files in app root directory:
 
    - `jsconfig.json` if you use JavaScript
    - `tsconfig.json` if you use TypeScript
