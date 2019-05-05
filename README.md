@@ -5,21 +5,27 @@
 
 You don't need to eject your App to add aliases!
 
-## Main advantage
+## List of Contents
 
-`cra-alias` uses standard `jsconfig.json` and `tsconfig.json` files, so you don't have to create any extra configuration files (like `config-overrides.js`)
+- [Main Advantages](#main-advantages)
+- [Checklist](#checklist)
+- [Installation](#installation)
 
-## Checklist
+### Main Advantages
+
+- `cra-alias` uses standard `jsconfig.json` and `tsconfig.json` files, so you don't have to create any extra configuration files (like `config-overrides.js`)
+
+- `cra-alias` automatically generates `moduleNameMapper` for Jest, according to your `js(ts)config.json`
+
+### Checklist
 
 - [x] Support `npm start`
 - [x] Support `npm run build`
-- [ ] Support `npm test`
+- [x] Support `npm test`
 - [x] Support TypeScript CRA
+- [ ] Support extra cli arguments
 
-## Installation
-
-> ⚠️ **Note:**  
-> `cra-alias test` is not supported at the moment.
+### Installation
 
 1. Install this package:
 
@@ -62,4 +68,4 @@ You don't need to eject your App to add aliases!
      }
    ```
 
-6. Done!
+6. Done. Let's get to work!
