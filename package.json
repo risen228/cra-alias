@@ -1,6 +1,6 @@
 {
   "name": "cra-alias",
-  "version": "3.4.4",
+  "version": "3.4.5",
   "description": "Add Webpack aliases to your CRA app, without pain",
   "keywords": [
     "react",
