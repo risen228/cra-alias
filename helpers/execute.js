@@ -35,5 +35,5 @@ module.exports = ({ scriptName, env }) => {
     };
   };
 
-  require(`react-scripts/scripts/${scriptName}`);
+  require(paths.scripts + `/scripts/${scriptName}`);
 };
