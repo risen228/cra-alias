@@ -1,7 +1,7 @@
 {
   "name": "cra-alias",
   "description": "Add Webpack aliases to your CRA app, without pain",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./index.js",
   "bin": {
     "cra-alias": "./index.js"
