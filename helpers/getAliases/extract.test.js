@@ -95,12 +95,15 @@ describe("extract", () => {
         }
       }).aliases;
 
+    const pathAnswer = { "@path": "../src/path" };
+    const configAnswer = { "@config": "../src/config.js" };
+    
     const variants = [
-      [["@path/*", ["./path/*", "./path/"]], { "@path": "../src/path" }],
-      [["@path/*", ["./path/*"]], { "@path": "../src/path" }],
-      [["@path", ["./path"]], { "@path": "../src/path" }],
-      [["@path/*", ["./path/../path/././*", "./path/"]], { "@path": "../src/path" }],
-      [["@config", ["./config.js"]], { "@config": "../src/config.js" }]
+      [["@path/*", ["./path/*", "./path/"]], pathAnswer],
+      [["@path/*", ["./path/*"]], pathAnswer],
+      [["@path", ["./path"]], pathAnswer],
+      [["@path/*", ["./path/../path/*", "./path/"]], pathAnswer],
+      [["@config", ["./config.js"]], configAnswer]
     ];
 
     for (let variant of variants) {
