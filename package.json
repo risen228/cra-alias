@@ -1,26 +1,29 @@
 {
   "name": "cra-alias",
-  "description": "Add Webpack aliases to your CRA app, without pain",
   "version": "2.1.4",
+  "description": "Add Webpack aliases to your CRA app, without pain",
+  "keywords": [
+    "react",
+    "cra",
+    "alias",
+    "aliases",
+    "webpack",
+    "create-react-app"
+  ],
+  "bugs": {
+    "url": "https://github.com/risenforces/cra-alias/issues"
+  },
+  "license": "MIT",
+  "author": "Evgeny Zakharov <i.am@risen.dev>",
   "main": "./index.js",
   "bin": {
     "cra-alias": "./index.js"
   },
+  "repository": "github:risenforces/cra-alias",
   "scripts": {
     "test": "jest '.*\\.test\\.js$'"
   },
   "devDependencies": {
     "jest": "^24.8.0"
-  },
-  "author": "Evgeny Zakharov <i.am@risen.dev>",
-  "license": "MIT",
-  "keywords": [
-    "create-react app aliases",
-    "webpack aliases cra",
-    "cra",
-    "aliases",
-    "webpack aliases",
-    "cra aliases",
-    "react aliases"
-  ]
+  }
 }
