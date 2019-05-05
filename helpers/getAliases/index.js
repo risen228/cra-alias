@@ -1,8 +1,8 @@
 const fs = require("fs");
 
-const paths = require("../constants/paths");
-const { errorsKeys } = require("../constants/errorsData");
-const getError = require("./getError");
+const paths = require("../../constants/paths");
+const { errorsKeys } = require("../../constants/errorsData");
+const getError = require("../getError");
 
 const extract = require("./extract");
 
