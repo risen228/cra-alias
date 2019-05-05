@@ -6,7 +6,9 @@
   "bin": {
     "cra-alias": "./index.js"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "jest '.*\\.test\\.js$'"
+  },
   "author": "Evgeny Zakharov <i.am@risen.dev>",
   "license": "MIT",
   "keywords": [
@@ -17,5 +19,8 @@
     "webpack aliases",
     "cra aliases",
     "react aliases"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }
