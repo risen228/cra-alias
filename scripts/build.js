@@ -1,6 +1,6 @@
 const execute = require("../helpers/execute");
 
 execute({
-  scriptName: "start",
+  scriptName: "build",
   env: "production"
 });

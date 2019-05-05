@@ -1,6 +1,6 @@
 const execute = require("../helpers/execute")
 
 execute({
-  scriptName: "start",
+  scriptName: "test",
   env: process.env.NODE_ENV || "test"
 })
