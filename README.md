@@ -22,6 +22,9 @@ You don't need to eject your App to add aliases!
 `cra-alias test` and `tsconfig.json` is not supported at the moment.
 </aside>
 
+> ⚠️ **Note:**  
+`cra-alias test` and `tsconfig.json` is not supported at the moment.
+
 1. Install this package:
 
    ```sh
