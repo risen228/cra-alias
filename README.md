@@ -24,6 +24,7 @@ You don't need to eject your App to add aliases!
 - [x] Support `npm test`
 - [x] Support TypeScript CRA
 - [ ] Support extra cli arguments
+- [ ] Add TypeScript example to README
 
 ### Installation
 
