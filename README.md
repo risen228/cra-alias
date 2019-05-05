@@ -34,7 +34,7 @@ You don't need to eject your App to add aliases!
 
 3. Edit it as follows:
 
-   ```json
+   ```js
    {
      "compilerOptions": {
        "baseUrl": "src", // only 'src' or 'node_modules'
