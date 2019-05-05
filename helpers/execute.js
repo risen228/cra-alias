@@ -62,8 +62,6 @@ const processConfig = configPath => {
   const aliases = {};
 
   for (let aliasName in paths) {
-    aliasName = aliasName.replace("/*", "");
-
     const aliasPaths = paths[aliasName];
 
     if (!Array.isArray(aliasPaths) || aliasPaths.length < 1) {
@@ -79,7 +77,9 @@ const processConfig = configPath => {
       ? aliasPath[0].slice(-1)
       : aliasPaths[0];
 
-    aliases[aliasName] = baseUrl + aliasPath;
+    const normalizedAliasName = aliasName.replace("/*", "");
+
+    aliases[normalizedAliasName] = baseUrl + aliasPath;
   }
 
   return {
