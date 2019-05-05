@@ -33,7 +33,7 @@ module.exports = () => {
     ) {
       return {
         result: "failure",
-        message: "No jsconfig.js or tsconfig.js in project directory"
+        message: "No jsconfig.json or tsconfig.json in project directory"
       };
     }
 
