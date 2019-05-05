@@ -1,4 +1,5 @@
 const fs = require("fs");
+const path = require("path");
 
 const paths = require("../../constants/paths");
 const { errorsKeys } = require("../../constants/errorsData");
@@ -6,7 +7,7 @@ const getError = require("../getError");
 
 const extract = require("./extract");
 
-const processConfig = configPath => {
+const processConfig = (configPath, options = {}) => {
   if (!fs.existsSync(configPath)) {
     return {
       result: "failure",
@@ -14,7 +15,18 @@ const processConfig = configPath => {
     };
   }
 
-  const config = require(configPath);
+  let config = require(configPath);
+
+  if (options.isTS) {
+    if (!config.extends) {
+      return {
+        result: "failure",
+        error: getError(errorsKeys.TSCONFIG_IS_NOT_EXTENDED)
+      };
+    }
+
+    config = require(path.resolve(paths.app, config.extends));
+  }
 
   return extract(config);
 };
@@ -22,7 +34,7 @@ const processConfig = configPath => {
 module.exports = () => {
   const results = {
     jsconfig: processConfig(paths.jsconfig),
-    tsconfig: processConfig(paths.tsconfig)
+    tsconfig: processConfig(paths.tsconfig, { isTS: true })
   };
 
   const resultsValues = Object.values(results);
