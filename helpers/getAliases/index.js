@@ -40,6 +40,10 @@ module.exports = () => {
     for (let configName in results) {
       const { result, error } = results[configName];
 
+      if (error.code === errorsKeys.CONFIG_NOT_EXIST) {
+        continue;
+      }
+
       if (result !== "success") {
         return {
           result,
