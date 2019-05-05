@@ -8,4 +8,3 @@ if (!["start", "test", "build"].includes(scriptName)) {
 }
 
 require(`./scripts/${scriptName}`);
-
