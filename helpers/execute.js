@@ -6,17 +6,35 @@ const paths = {
   tsconfig: process.env.PWD + "/tsconfig.json"
 };
 
-const messages = {
-  CONFIG_NOT_EXIST: "Config is not exist",
-  BASE_URL_IS_UNDEFINED: "'compilerOptions.baseUrl' is not specified",
-  PATHS_IS_UNDEFINED: "'compilerOptions.paths' is not specified"
+const errorKeys = {
+  CONFIG_NOT_EXIST: "CONFIG_NOT_EXIST",
+  BASE_URL_IS_UNDEFINED: "BASE_URL_IS_UNDEFINED",
+  PATHS_IS_UNDEFINED: "PATHS_IS_UNDEFINED",
+  INVALID_ALIAS_PATHS: "INVALID_ALIAS_PATHS"
+};
+
+const errorMessages = {
+  [errorKeys.CONFIG_NOT_EXIST]: () => "Config is not exist",
+  [errorKeys.BASE_URL_IS_UNDEFINED]: () =>
+    "'compilerOptions.baseUrl' is not specified",
+  [errorKeys.PATHS_IS_UNDEFINED]: () =>
+    "'compilerOptions.paths' is not specified",
+  [errorKeys.INVALID_ALIAS_PATHS]: ({ aliasName }) =>
+    `Invalid alias paths for '${aliasName}'`
+};
+
+const getError = (key, params) => {
+  return {
+    code: key,
+    message: errorMessages[key](params)
+  };
 };
 
 const processConfig = configPath => {
   if (!fs.existsSync(configPath)) {
     return {
       result: "failure",
-      message: messages.CONFIG_NOT_EXIST
+      error: getError(errorKeys.CONFIG_NOT_EXIST)
     };
   }
 
@@ -28,14 +46,14 @@ const processConfig = configPath => {
   if (!baseUrl) {
     return {
       result: "failure",
-      message: messages.BASE_URL_IS_UNDEFINED
+      error: getError(errorKeys.BASE_URL_IS_UNDEFINED)
     };
   }
 
   if (!paths) {
     return {
       result: "failure",
-      message: messages.PATHS_IS_UNDEFINED
+      error: getError(errorKeys.PATHS_IS_UNDEFINED)
     };
   }
 
@@ -45,7 +63,21 @@ const processConfig = configPath => {
 
   for (let aliasName in paths) {
     aliasName = aliasName.replace("/*", "");
-    const aliasPath = paths[aliasName];
+
+    const aliasPaths = paths[aliasName];
+
+    if (!Array.isArray(aliasPaths) || aliasPaths.length < 1) {
+      return {
+        result: "failure",
+        error: getError(errorKeys.INVALID_ALIAS_PATHS, { aliasName })
+      };
+    }
+
+    const aliasPath = aliasPaths[0].endsWith("/*")
+      ? aliasPaths[0].slice(-2)
+      : aliasPaths[0].endsWith("/")
+      ? aliasPath[0].slice(-1)
+      : aliasPaths[0];
 
     aliases[aliasName] = baseUrl + aliasPath;
   }
@@ -57,41 +89,34 @@ const processConfig = configPath => {
 };
 
 const getAliases = () => {
-  let idx;
-  const jsconfigRes = processConfig(paths.jsconfig);
-  const tsconfigRes = processConfig(paths.tsconfig);
+  const results = {
+    jsconfig: processConfig(paths.jsconfig),
+    tsconfig: processConfig(paths.tsconfig)
+  };
 
-  if (jsconfigRes.result !== "success" && tsconfigRes.result !== "success") {
-    const configsNames = ["jsconfig.js", "tsconfig.js"];
-    const resMessages = [jsconfigRes.message, tsconfigRes.message];
+  const resultsValues = Object.values(results);
 
-    if (resMessages.every(msg => msg === messages.CONFIG_NOT_EXIST)) {
+  if (resultsValues.every(r => r.result !== "success")) {
+    if (resultsValues.every(r => r.error.code === errorKeys.CONFIG_NOT_EXIST)) {
       return {
         result: "failure",
         message: "No jsconfig.js or tsconfig.js in project directory"
       };
     }
 
-    idx = resMessages.findIndex(msg => msg === messages.BASE_URL_IS_UNDEFINED);
-    if (idx > -1) {
-      return {
-        result: "failure",
-        message: `${configsNames[idx]}: ${messages.BASE_URL_IS_UNDEFINED}`
-      };
-    }
+    for (let configName in results) {
+      const { result, error } = results[configName];
 
-    idx = resMessages.findIndex(msg => msg === messages.PATHS_IS_UNDEFINED);
-    if (idx > -1) {
-      return {
-        result: "failure",
-        message: `${configsNames[idx]}: ${messages.PATHS_IS_UNDEFINED}`
-      };
+      if (result !== "success") {
+        return {
+          result,
+          error
+        };
+      }
     }
   }
 
-  const result = jsconfigRes.result === "success" ? jsconfigRes : tsconfigRes;
-
-  return result;
+  return resultsValues.find(r => r.result === "success");
 };
 
 module.exports = ({ scriptName, env }) => {
@@ -104,7 +129,7 @@ module.exports = ({ scriptName, env }) => {
     const aliasesRes = getAliases();
 
     if (aliasesRes.result !== "success") {
-      console.log(aliasesRes.message);
+      console.log(aliasesRes.error.message);
       process.exit();
     }
 
