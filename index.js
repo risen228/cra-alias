@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const scriptName = process.argv[2];
 
 if (!["start", "test", "build"].includes(scriptName)) {
