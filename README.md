@@ -1,7 +1,9 @@
 # cra-alias
 
-![npm](https://img.shields.io/npm/v/cra-alias.svg)
-[![Build Status](https://travis-ci.org/risenforces/cra-alias.svg?branch=master)](https://travis-ci.org/risenforces/cra-alias)
+![npm](https://img.shields.io/npm/v/cra-alias.svg?style=flat-square)
+![Travis (.org)](https://img.shields.io/travis/risenforces/cra-alias.svg?style=flat-square)
+![NPM](https://img.shields.io/npm/l/cra-alias.svg?color=%2358a258&style=flat-square)
+![GitHub stars](https://img.shields.io/github/stars/risenforces/cra-alias.svg?style=social)
 
 You don't need to eject your App to add aliases!
 
