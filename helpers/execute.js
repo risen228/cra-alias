@@ -8,8 +8,8 @@ const paths = {
 
 const messages = {
   CONFIG_NOT_EXIST: "Config is not exist",
-  BASE_URL_IS_UNDEFINED: "'baseUrl' is not specified",
-  PATHS_IS_UNDEFINED: "'paths' is not specified"
+  BASE_URL_IS_UNDEFINED: "'compilerOptions.baseUrl' is not specified",
+  PATHS_IS_UNDEFINED: "'compilerOptions.paths' is not specified"
 };
 
 const processConfig = configPath => {
@@ -22,7 +22,8 @@ const processConfig = configPath => {
 
   const config = require(configPath);
 
-  let { baseUrl, paths } = config;
+  const compilerOptions = config.compilerOptions || {};
+  let { baseUrl, paths } = compilerOptions;
 
   if (!baseUrl) {
     return {
