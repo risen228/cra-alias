@@ -12,14 +12,14 @@ You don't need to eject your App to add aliases!
 ## Checklist
 
 - [x] Support `npm start`
-- [ ] Support `npm test`
 - [x] Support `npm run build`
-- [ ] Support `tsconfig.json`
+- [ ] Support `npm test`
+- [x] Support TypeScript CRA
 
 ## Installation
 
 > ⚠️ **Note:**  
-> `cra-alias test` and `tsconfig.json` is not supported at the moment.
+> `cra-alias test` is not supported at the moment.
 
 1. Install this package:
 
