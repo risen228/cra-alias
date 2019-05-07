@@ -21,7 +21,7 @@ module.exports = config => {
     };
   }
 
-  if (!["src/", "node_modules/"].includes(path.normalize(baseUrl + "/"))) {
+  if (![path.normalize("src/"), path.normalize("node_modules/")].includes(path.normalize(baseUrl + "/"))) {
     return {
       result: "failure",
       error: getError(errorsKeys.INVALID_BASE_URL)
