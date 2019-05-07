@@ -1,3 +1,5 @@
+const path = require("path");
+
 const { errorsKeys } = require("../../constants/errorsData");
 
 const extract = require("./extract");
@@ -77,7 +79,7 @@ describe("extract", () => {
       "././src/../././src/."
     ];
 
-    const answer = "../src/path";
+    const answer = path.normalize("../src/path");
 
     for (let variant of variants) {
       expect(withBaseUrl(variant)).toBe(answer);
@@ -95,9 +97,9 @@ describe("extract", () => {
         }
       }).aliases;
 
-    const pathAnswer = { "@path": "../src/path" };
-    const configAnswer = { "@config": "../src/config.js" };
-    
+    const pathAnswer = { "@path": path.normalize("../src/path") };
+    const configAnswer = { "@config": path.normalize("../src/config.js") };
+
     const variants = [
       [["@path/*", ["./path/*", "./path/"]], pathAnswer],
       [["@path/*", ["./path/*"]], pathAnswer],
@@ -124,9 +126,9 @@ describe("extract", () => {
         }
       }).aliases
     ).toEqual({
-      "@config": "../src/config.js",
-      "@constants": "../src/constants",
-      "@helpers": "../src/helpers"
+      "@config": path.normalize("../src/config.js"),
+      "@constants": path.normalize("../src/constants"),
+      "@helpers": path.normalize("../src/helpers")
     });
   });
 });

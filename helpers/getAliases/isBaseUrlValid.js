@@ -1,9 +1,9 @@
-const { normalize: n } = require("path");
+const { normalize } = require("path");
 
-const validUrls = [n("src/"), n("node_modules/")];
+const validUrls = [normalize("src/"), normalize("node_modules/")];
 
 module.exports = baseUrl => {
-  const normalizedBaseUrl = n(baseUrl + "/");
+  const normalizedBaseUrl = normalize(baseUrl + "/");
 
   return validUrls.includes(normalizedBaseUrl);
 };
