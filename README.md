@@ -1,9 +1,7 @@
 # cra-alias
 
-![npm](https://img.shields.io/npm/v/cra-alias.svg?style=flat-square)
-![Travis (.org)](https://img.shields.io/travis/risenforces/cra-alias.svg?style=flat-square)
-![NPM](https://img.shields.io/npm/l/cra-alias.svg?color=%2358a258&style=flat-square)
-![GitHub stars](https://img.shields.io/github/stars/risenforces/cra-alias.svg?style=social)
+[![npm](https://img.shields.io/npm/v/cra-alias.svg?style=flat-square)](https://travis-ci.org/facebook/create-react-app)
+[![Travis (.org)](https://img.shields.io/travis/risenforces/cra-alias.svg?style=flat-square)](https://travis-ci.org/risenforces/cra-alias)
 
 You don't need to eject your App to add aliases!
 
