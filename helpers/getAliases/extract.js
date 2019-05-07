@@ -1,5 +1,6 @@
 const path = require("path");
 
+const isBaseUrlValid = require("./isBaseUrlValid");
 const { errorsKeys } = require("../../constants/errorsData");
 const getError = require("../getError");
 
@@ -21,7 +22,7 @@ module.exports = config => {
     };
   }
 
-  if (![path.normalize("src/"), path.normalize("node_modules/")].includes(path.normalize(baseUrl + "/"))) {
+  if (!isBaseUrlValid(baseUrl)) {
     return {
       result: "failure",
       error: getError(errorsKeys.INVALID_BASE_URL)
