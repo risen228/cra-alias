@@ -7,4 +7,10 @@ if (!["start", "test", "build"].includes(scriptName)) {
   process.exit();
 }
 
-require(`./scripts/${scriptName}`);
+const execute = require("./helpers/execute");
+const envs = require("./constants/envs");
+
+execute({
+  scriptName,
+  env: envs[scriptName]
+});
