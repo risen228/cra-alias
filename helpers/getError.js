@@ -1,3 +1,4 @@
+const chalk = require("chalk");
 const { errorsMessages } = require("../constants/errorsData");
 
 module.exports = (key, params) => {
@@ -5,6 +6,6 @@ module.exports = (key, params) => {
 
   return {
     code: key,
-    message: typeof msg === "function" ? msg(params) : msg
+    message: chalk.red(typeof msg === "function" ? msg(params) : msg) + "\n"
   };
 };

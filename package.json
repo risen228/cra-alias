@@ -25,5 +25,8 @@
   },
   "devDependencies": {
     "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2"
   }
 }
