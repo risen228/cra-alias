@@ -1,4 +1,5 @@
 const errorsKeys = {
+  UNKNOWN_SCRIPT: "UNKNOWN_SCRIPT",
   CONFIG_NOT_EXIST: "CONFIG_NOT_EXIST",
   BASE_URL_IS_UNDEFINED: "BASE_URL_IS_UNDEFINED",
   INVALID_BASE_URL: "INVALID_BASE_URL",
@@ -8,6 +9,11 @@ const errorsKeys = {
 };
 
 const errorsMessages = {
+  [errorsKeys.UNKNOWN_SCRIPT]: ({ scriptName, availableScripts }) =>
+    `Unknown script with name "${scriptName}". ` +
+    "Available scripts are: " +
+    availableScripts.map(s => `"${s}"`).join(", ") +
+    ".",
   [errorsKeys.CONFIG_NOT_EXIST]: "Config is not exist",
   [errorsKeys.BASE_URL_IS_UNDEFINED]:
     "'compilerOptions.baseUrl' is not specified",
