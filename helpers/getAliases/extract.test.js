@@ -1,6 +1,7 @@
 const path = require("path");
 
 const { errorsKeys } = require("../../constants/errorsData");
+const runDir = process.env.PWD;
 
 const extract = require("./extract");
 
@@ -79,7 +80,7 @@ describe("extract", () => {
       "././src/../././src/."
     ];
 
-    const answer = path.normalize("../src/path");
+    const answer = path.join(runDir, "src/path");
 
     for (let variant of variants) {
       expect(withBaseUrl(variant)).toBe(answer);
@@ -97,8 +98,8 @@ describe("extract", () => {
         }
       }).aliases;
 
-    const pathAnswer = { "@path": path.normalize("../src/path") };
-    const configAnswer = { "@config": path.normalize("../src/config.js") };
+    const pathAnswer = { "@path": path.join(runDir, "src/path") };
+    const configAnswer = { "@config": path.join(runDir, "src/config.js") };
 
     const variants = [
       [["@path/*", ["./path/*", "./path/"]], pathAnswer],
@@ -126,9 +127,9 @@ describe("extract", () => {
         }
       }).aliases
     ).toEqual({
-      "@config": path.normalize("../src/config.js"),
-      "@constants": path.normalize("../src/constants"),
-      "@helpers": path.normalize("../src/helpers")
+      "@config": path.join(runDir, "src/config.js"),
+      "@constants": path.join(runDir, "src/constants"),
+      "@helpers": path.join(runDir, "src/helpers")
     });
   });
 });

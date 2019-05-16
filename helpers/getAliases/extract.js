@@ -3,6 +3,7 @@ const path = require("path");
 const isBaseUrlValid = require("./isBaseUrlValid");
 const { errorsKeys } = require("../../constants/errorsData");
 const getError = require("../getError");
+const pathsConfig = require("../../constants/paths");
 
 module.exports = config => {
   const compilerOptions = config.compilerOptions || {};
@@ -49,7 +50,11 @@ module.exports = config => {
 
     const normalizedAliasName = aliasName.replace("/*", "");
 
-    aliases[normalizedAliasName] = path.join("../", baseUrl, aliasPath);
+    aliases[normalizedAliasName] = path.join(
+      pathsConfig.app,
+      baseUrl,
+      aliasPath
+    );
   }
 
   return {
