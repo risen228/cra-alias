@@ -7,7 +7,7 @@ module.exports = ({ initialConfig, aliases }) => {
     ...initialConfig,
     moduleNameMapper: {
       ...initialConfig.moduleNameMapper,
-      ...customModuleNameMap
+      ...customModuleNameMapper
     }
   };
 };
