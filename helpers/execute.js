@@ -2,6 +2,7 @@ const path = require("path");
 
 const paths = require("../constants/paths");
 const getAliases = require("./getAliases");
+const buildJestConfig = require("./buildJestConfig");
 
 module.exports = ({ scriptName, env }) => {
   process.env.NODE_ENV = env;
@@ -49,30 +50,13 @@ module.exports = ({ scriptName, env }) => {
     // restore package.json jest config
     packageJson.jest = savedPackageJsonJest;
 
-    require.cache[require.resolve(paths.createJestConfig)].exports = () => {
-      const customModuleNameMap = {};
-      for (let aliasName in aliasesRes.aliases) {
-        const aliasPath = aliasesRes.aliases[aliasName];
+    const customJestConfig = buildJestConfig({
+      initialConfig: defaultJestConfig,
+      aliases: aliasesRes.aliases
+    });
 
-        let nameEnding = "$";
-        let pathEnding = "";
-        if (path.extname(aliasPath).length === 0) {
-          nameEnding = "(.*)$";
-          pathEnding = "$1";
-        }
-
-        customModuleNameMap[`^${aliasName}${nameEnding}`] =
-          "<rootDir>" + path.join(`/src/`, aliasPath) + pathEnding;
-      }
-
-      return {
-        ...defaultJestConfig,
-        moduleNameMapper: {
-          ...defaultJestConfig.moduleNameMapper,
-          ...customModuleNameMap
-        }
-      };
-    };
+    require.cache[require.resolve(paths.createJestConfig)].exports = () =>
+      customJestConfig;
   }
 
   require(paths.scripts + `/scripts/${scriptName}`);
