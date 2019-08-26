@@ -14,7 +14,7 @@
     "url": "https://github.com/risenforces/cra-alias/issues"
   },
   "license": "MIT",
-  "author": "Evgeny Zakharov <i.am@risen.dev>",
+  "author": "Evgeny Zakharov <to@risen.dev>",
   "main": "./index.js",
   "bin": {
     "cra-alias": "./index.js"
