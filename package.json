@@ -5,9 +5,10 @@
   "keywords": [
     "react",
     "cra",
+    "webpack",
+    "jest",
     "alias",
     "aliases",
-    "webpack",
     "create-react-app"
   ],
   "bugs": {
