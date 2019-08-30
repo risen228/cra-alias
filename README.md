@@ -1,3 +1,6 @@
+## **IMPORTANT NOTE**
+**This package is _NO LONGER MAINTAINED_, please use [craco-alias](https://github.com/risenforces/craco-alias#migrating-from-cra-alias) instead.**
+
 # cra-alias
 
 [![npm](https://img.shields.io/npm/v/cra-alias.svg?style=flat-square)](https://www.npmjs.com/package/cra-alias)
