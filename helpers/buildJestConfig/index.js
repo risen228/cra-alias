@@ -9,6 +9,6 @@ module.exports = ({ initialConfig, packageJsonJestConfig, aliases }) => {
       ...initialConfig.moduleNameMapper,
       ...customModuleNameMapper
     },
-    ...packageJsonJestConfig
+    ...(packageJsonJestConfig || {})
   };
 };
