@@ -1,6 +1,6 @@
 const buildModuleNameMapper = require("./buildModuleNameMapper");
 
-module.exports = ({ initialConfig, aliases }) => {
+module.exports = ({ initialConfig, packageJsonJestConfig, aliases }) => {
   const customModuleNameMapper = buildModuleNameMapper({ aliases });
 
   return {
@@ -8,6 +8,7 @@ module.exports = ({ initialConfig, aliases }) => {
     moduleNameMapper: {
       ...initialConfig.moduleNameMapper,
       ...customModuleNameMapper
-    }
+    },
+    ...packageJsonJestConfig
   };
 };

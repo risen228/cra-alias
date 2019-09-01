@@ -52,6 +52,7 @@ module.exports = ({ scriptName, env }) => {
 
     const customJestConfig = buildJestConfig({
       initialConfig: defaultJestConfig,
+      packageJsonJestConfig: savedPackageJsonJest,
       aliases: aliasesRes.aliases
     });
 
